@@ -114,8 +114,8 @@ package jpa;
 	            Person person = new Person("smith","john","js@gmail.com");
 	            manager.persist(person);
 
-	            manager.persist(new Residence(45, 2,person));
-	            manager.persist(new Residence(120, 5,person));
+	            manager.persist(new Residence(45, 2, person));
+	            manager.persist(new Residence(120, 5, person));
 
 	        }
 	    }
