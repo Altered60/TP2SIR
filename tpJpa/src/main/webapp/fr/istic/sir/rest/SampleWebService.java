@@ -12,6 +12,8 @@ import test.testjpa.domain.EE;
 import test.testjpa.domain.Person;
 import test.testjpa.domain.Residence;
 
+
+
 @Path("/hello")
 public class SampleWebService {
     @GET
@@ -24,7 +26,8 @@ public class SampleWebService {
     @Path("/home")
     @Produces(MediaType.APPLICATION_JSON)
     public Residence getResidence() {
-    	Residence h = new Residence();
+    	Person p = new Person("toto", "tata", "titi");
+    	Residence h = new Residence(50,50,p);
         h.setPerson(new Person("toto", "tata", "titi"));
         EE h1 = new EE();
         h1.setConso(500);
@@ -34,8 +37,8 @@ public class SampleWebService {
         ee.add(h1);
         ee.add(h2);
         h.setEe(ee);
-
         return h;
     }
-
+    
+ 
 }
