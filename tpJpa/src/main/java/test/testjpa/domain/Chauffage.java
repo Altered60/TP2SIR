@@ -7,8 +7,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Chauffage {
-
+//public class Chauffage extends SmartDevice{
+public class Chauffage{
+	
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	

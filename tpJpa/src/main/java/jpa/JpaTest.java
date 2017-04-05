@@ -73,8 +73,11 @@ package jpa;
 	import javax.persistence.EntityManagerFactory;
 	import javax.persistence.EntityTransaction;
 	import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
-	import test.testjpa.domain.Residence;
+import test.testjpa.domain.Residence;
 	import test.testjpa.domain.Person;
 
 	public class JpaTest {
@@ -84,29 +87,7 @@ package jpa;
 	    public JpaTest(EntityManager manager) {
 	        this.manager = manager;
 	    }
-	    /**
-	     * @param args
-	     */
-	    public static void main(String[] args) {
-	        EntityManagerFactory factory =   
-	              Persistence.createEntityManagerFactory("example");
-	        EntityManager manager = factory.createEntityManager();
-	        JpaTest test = new JpaTest(manager);
 
-	        EntityTransaction tx = manager.getTransaction();
-	        tx.begin();
-	        try {
-	            test.createResidences();
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
-	        tx.commit();
-
-	        test.listResidences();
-	            
-	        manager.close();
-	        System.out.println(".. done");
-	    }
 
 	    private void createResidences() {
 	        int numOfResidences = manager.createQuery("Select a From Residence a", Residence.class).getResultList().size();
@@ -126,6 +107,43 @@ package jpa;
 	        for (Residence next : resultList) {
 	            System.out.println("next residence: " + next);
 	        }
+	    }
+	    
+	    private void testCriteria(){
+	    	 CriteriaBuilder cb = manager.getCriteriaBuilder();
+	    	 CriteriaQuery<Residence> q = cb.createQuery(Residence.class);
+	    	  Root<Residence> c = q.from(Residence.class);
+	    	  System.out.println(q.select(c));
+	    }
+	    
+	    
+	    /**
+	     * @param args
+	     */
+	    public static void main(String[] args) {
+	        EntityManagerFactory factory =   
+	              Persistence.createEntityManagerFactory("example");
+	        EntityManager manager = factory.createEntityManager();
+	        JpaTest test = new JpaTest(manager);
+//
+	        EntityTransaction tx = manager.getTransaction();
+	        tx.begin();
+	        try {
+	        	
+	            test.createResidences();
+	            
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	        tx.commit();
+//
+	        test.listResidences();
+//	            test.test();
+	        manager.close();
+	        System.out.println(".. done");
+	    	
+	    	
+	    	
 	    }
 	
 	

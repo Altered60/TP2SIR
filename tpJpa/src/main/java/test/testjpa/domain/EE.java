@@ -7,7 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class EE {
+//public class EE extends SmartDevice{
+public class EE{
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	private int conso;
